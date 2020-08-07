@@ -2,25 +2,17 @@
 
 name: deploy-2
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
-    branches: [ master ]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    branches:
+    - master
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  main:
+    name: Build and Deploy
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v1
-      - name: Yarn Install
-        run: yarn install
-      - name: Yarn Build
-        run: yarn build
-      - name: Deploy
-        run: npx firebase deploy --token "${{secrets.FIREBASE_TOKEN}}"
+    - name: Deploy to Firebase
+      uses: doonstore/firebase-deploy@v1
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_PROJECT: ${{ secrets.FIREBASE_PROJECT }}
