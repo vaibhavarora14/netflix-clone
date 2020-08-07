@@ -23,6 +23,7 @@
   min-width: 130px;
   margin-right: 10px;
   transition: transform 450ms;
+  cursor: pointer;
 }
 
 .row__posterLarge {
